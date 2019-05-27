@@ -1,8 +1,8 @@
 package com.example.mvpbestpractice.View;
 
-public interface IMainView {
+import com.example.mvpbestpractice.base.IBaseView;
 
-
+public interface IMainView extends IBaseView {
     void loginSuccess();
     void loginFailed();
     void logonSuccess();

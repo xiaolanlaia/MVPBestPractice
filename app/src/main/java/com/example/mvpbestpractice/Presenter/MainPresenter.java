@@ -1,38 +1,36 @@
 package com.example.mvpbestpractice.Presenter;
 
-import android.widget.Toast;
+
 
 import com.example.mvpbestpractice.Model.ILoginListener;
 import com.example.mvpbestpractice.Model.ILogonListener;
 import com.example.mvpbestpractice.Model.IMainModel;
 import com.example.mvpbestpractice.Model.MainModel;
 import com.example.mvpbestpractice.View.IMainView;
+import com.example.mvpbestpractice.base.BasePresenter;
 
-public class MainPresenter {
+public class MainPresenter extends BasePresenter<IMainView> {
 
-    private IMainView iMainView;
+    // 的实例传入Presenter
+
     private IMainModel iMainModel;
 
-    public MainPresenter(IMainView iMainView){
-        this.iMainView = iMainView;
+    public MainPresenter(){
         iMainModel = new MainModel();
     }
-
-
-
     public void login(String account,String password){
-
+        //将account、password传入Model
+        //实现数据从Presenter传入Model
         iMainModel.login(account, password, new ILoginListener() {
+
             @Override
             public void loginSuccess() {
-
-                iMainView.loginSuccess();
+                getView().loginSuccess();
             }
 
             @Override
             public void loginFailed() {
-
-                iMainView.loginFailed();
+                getView().loginFailed();
             }
         });
     }
@@ -41,13 +39,12 @@ public class MainPresenter {
         iMainModel.logon(account, password, new ILogonListener() {
             @Override
             public void logonSuccess() {
-                iMainView.logonSuccess();
+                getView().logonSuccess();
             }
 
             @Override
             public void logonFailed() {
-
-                iMainView.logonFailed();
+                getView().logonFailed();
             }
         });
     }
